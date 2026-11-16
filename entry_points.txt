@@ -1,0 +1,2 @@
+[console_scripts]
+ngfs = ngfs.cli:main

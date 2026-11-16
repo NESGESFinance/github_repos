@@ -1,0 +1,27 @@
+# NGFSistem — variables de entorno de ejemplo. Copie a .env y ajuste. NO incluya secretos reales en el repositorio.
+
+# Entorno: desarrollo | pruebas | produccion (en produccion se exige un NGFS_JWT_SECRETO fuerte)
+NGFS_ENTORNO=desarrollo
+
+# Base de datos: SQLite por defecto; PostgreSQL p. ej. postgresql+psycopg://ngfs:CAMBIAR@localhost:5432/ngfs
+DATABASE_URL=sqlite:///./ngfs.db
+
+# JWT — genere uno con: python -c "import secrets; print(secrets.token_urlsafe(48))"
+NGFS_JWT_SECRETO=CAMBIAR_POR_UN_SECRETO_ALEATORIO_DE_48_CARACTERES
+NGFS_JWT_MINUTOS_EXPIRACION=60
+
+# Política de acceso
+NGFS_MAX_INTENTOS_LOGIN=5
+NGFS_MINUTOS_BLOQUEO=15
+NGFS_LONGITUD_MINIMA_PASSWORD=12
+NGFS_MAX_TAMANO_DOCUMENTO_MB=25
+
+# Contraseña del administrador inicial (solo para `python -m ngfs.cli crear-admin`)
+NGFS_ADMIN_PASSWORD=
+
+# Adaptador UASI v5 (opcional, consultivo, desactivado por defecto)
+NGFS_UASI_HABILITADO=false
+NGFS_UASI_URL=http://localhost:8000
+NGFS_UASI_RUTA_ANALISIS=/api/v5/ngfs/analisis-consultivo
+NGFS_UASI_TOKEN=
+NGFS_UASI_TIMEOUT_SEGUNDOS=5

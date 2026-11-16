@@ -1,0 +1,31 @@
+# NGFSistem con PostgreSQL. Uso:
+#   cp .env.example .env   # y defina NGFS_JWT_SECRETO y POSTGRES_PASSWORD
+#   docker compose up --build
+#   docker compose exec ngfs python -m ngfs.cli crear-admin --usuario admin   (con NGFS_ADMIN_PASSWORD en .env)
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ngfs
+      POSTGRES_USER: ngfs
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}
+    volumes:
+      - ngfs_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ngfs -d ngfs"]
+      interval: 5s
+      retries: 10
+
+  ngfs:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://ngfs:${POSTGRES_PASSWORD}@db:5432/ngfs
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  ngfs_pg:

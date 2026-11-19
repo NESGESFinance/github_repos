@@ -1,0 +1,28 @@
+# Entornos y secretos locales (las plantillas se conservan)
+**/.env
+**/.env.*
+!**/.env.example
+**/.venv/
+
+# Python, herramientas y artefactos generados
+**/__pycache__/
+*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.coverage
+**/htmlcov/
+**/build/
+**/dist/
+**/src/*.egg-info/
+
+# Datos locales de las aplicaciones y pruebas
+**/uasi_workspace/
+**/.uasi_test_workspace/
+*.db
+*.db-shm
+*.db-wal
+
+# Configuración local generada por las herramientas
+mise.local.toml
+.vercel/
